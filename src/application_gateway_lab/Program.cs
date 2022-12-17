@@ -26,7 +26,7 @@ builder.Host
        .UseSerilog((context, configuration) =>
        {
            configuration.ReadFrom.Configuration(context.Configuration);
-           configuration.Enrich.WithProperty("ApplicationName", Assembly.GetEntryAssembly().GetName().Name);
+           configuration.Enrich.WithProperty("ApplicationName", AppDomain.CurrentDomain.FriendlyName);
            configuration.Enrich.WithProperty("MACHINENAME",
                                              Environment.GetEnvironmentVariable("MACHINENAME") ??
                                              Environment.MachineName);
@@ -58,7 +58,7 @@ builder.Services.AddW3CLogging(logging =>
 
     logging.FileSizeLimit = 5 * 1024 * 1024;
     logging.RetainedFileCountLimit = 2;
-    logging.FileName = Assembly.GetEntryAssembly().GetName().Name + Environment.MachineName;
+    logging.FileName = AppDomain.CurrentDomain.FriendlyName + Environment.MachineName;
     logging.FlushInterval = TimeSpan.FromSeconds(2);
 
     //.net 7 new feature
