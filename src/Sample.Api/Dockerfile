@@ -1,9 +1,7 @@
-﻿FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+﻿FROM ghcr.io/yuchia-wei/otel-dotnet-auto-instrumentation:10.0-noble-chiseled AS base
 WORKDIR /app
-EXPOSE 8080
-EXPOSE 8443
 
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /src
 COPY ["Sample.Api/Sample.WebApi.csproj", "Sample.Api/"]
 RUN dotnet restore "Sample.Api/Sample.WebApi.csproj"
